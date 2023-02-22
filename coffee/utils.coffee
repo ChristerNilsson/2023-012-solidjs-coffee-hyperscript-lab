@@ -12,9 +12,9 @@ export memo = createMemo
 
 export N = 8
 
-export col = (n) => 7 - n %% N
+export col = (n) => n %% N
 export row = (n) => n // N
-export sum = (arr)	=> arr.reduce(((a, b) => a + b), 0)
+export sum = (arr) => arr.reduce(((a, b) => a + b), 0)
 export r4r = (a) => render a, document.getElementById "app"
 
 export map = _.map
