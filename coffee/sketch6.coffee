@@ -16,15 +16,17 @@ Game = =>
 		setA => hist()[1]
 		setHist => hist().slice 1
 
-	str = => map(hist(), (item) => item).join " "
+	str = => hist().join " "
 
 	div {},
-		button {onClick: => update a()+2},"add"
-		button {onClick: => update a()*2},"mul"
-		button {onClick: => update a()/2},"div"
-		button {onClick: => undo()},"undo"
-		# => a()
+		button {onClick: => update a()+2}, "add"
+		button {onClick: => update a()*2}, "mul"
+		button {onClick: => update a()/2}, "div"
+		button {onClick: => undo()}, "undo"
 		=> str()
 		=> map hist(), (item) => div {}, item
 
-r4r => div {}, Game, Game
+r4r =>
+	div {},
+		Game
+		Game
