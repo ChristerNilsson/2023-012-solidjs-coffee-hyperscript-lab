@@ -23,6 +23,7 @@ export log = console.log
 export abs = Math.abs
 
 export a = (a...) => h "a", a
+export b = (a...) => h "b", a
 export button = (a...) => h "button", a
 export circle = (a...) => h "circle", a
 export defs = (a...) => h "defs", a

@@ -6,7 +6,7 @@ QUEEN = '♛'
 KNIGHT = '♘'
 S = 62 # square size
 
-[state,setState] = signal -1 # 0 or 1
+[state,setState] = signal -1 # 0,1 or 2
 [queens,setQueens] = signal [] # indexes
 [queen,setQueen] = signal -1 # index
 [knight,setKnight] = signal -1 # index 
@@ -18,8 +18,8 @@ S = 62 # square size
 [count,setCount] = signal 0 # count
 [counts, setCounts] = signal [] # counts moves per square
 [mask,setMask] = signal 0 # 0,1,2 or 3
-[info,setInfo] = signal ['x','y','z']
-[start,setStart] = signal 0
+[info,setInfo] = signal [] # info text
+[start,setStart] = signal 0 # measure time
 
 show = (a,b) =>
 	log a,b
