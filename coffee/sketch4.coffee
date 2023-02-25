@@ -18,6 +18,7 @@ import {log,r4r,signal} from "/js/utils.js"
 import {input,button,div,b,p} from "/js/utils.js"
 
 # All data måste ligga före App!
+# Kan ej få två instanser av App att fungera samtidigt.
 [todos, setTodos] = signal [
 	{id: "1", text: "Adam", done: false},
 	{id: "2", text: "Bertil", done: true},
