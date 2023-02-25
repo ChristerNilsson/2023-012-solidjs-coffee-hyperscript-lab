@@ -14,8 +14,8 @@
 # return kan oftast strykas.
 # Typer kan tas bort.
 
-import {r4r,signal,memo} from "/js/utils.js"
-import {input,button,div,log,b} from "/js/utils.js"
+import {log,r4r,signal} from "/js/utils.js"
+import {input,button,div,b,p} from "/js/utils.js"
 
 # All data måste ligga före App!
 [todos, setTodos] = signal [
@@ -24,50 +24,36 @@ import {input,button,div,log,b} from "/js/utils.js"
 	{id: "3", text: "Cesar", done: false},
 	{id: "4", text: "David", done: true},
 ]
-[inputx, setInputx] = signal ""
 
 App = =>
 
-	doneTodos   = memo => todos().filter (todo) =>  todo.done
-	undoneTodos = memo => todos().filter (todo) => !todo.done
+	doneTodos   =  => todos().filter (todo) =>  todo.done
+	undoneTodos =  => todos().filter (todo) => !todo.done
 
 	createTodo = (text) => setTodos => [...todos(), { id: "#{Math.random()}", text, done: false }]
 	removeTodo = (todoId) => setTodos todos().filter (todo) => todo.id != todoId
 	setTodoDone = (todoId, done) => setTodos todos().map (todo) => if todo.id == todoId then { ...todo, done } else todo
 
-	addTodo = =>
-		currentInput = inputx()
-		if currentInput
-			createTodo currentInput
-			setInputx ""
-
-	onkeydown = (event) =>
-		if event.key == "Enter"
-			setInputx event.target.value
-			addTodo()
-
-	addClick = (event) =>
-		setInputx inp.value
-		addTodo()
+	addTodo = (s) => if s then createTodo s
+	onkeydown = (event) => if event.key == "Enter" then addTodo event.target.value
+	addClick = (event) => addTodo inp.value
 	
 	div {},
-		inp = input {value: inputx(), onkeydown}
+		inp = input {value: "", onkeydown}
 		button {onClick: addClick}, "Add"
-		div {}, 
+		p {},
 			b {}, "Todo"
-		for todo in undoneTodos()
-			do (todo) =>
-				div {}, 
-					todo.text
+			for todo in undoneTodos()
+				do (todo) => div {},
 					button {onClick: => setTodoDone todo.id, true}, "Done"
-		div {}, 
-			b {}, "Done:"
+					" " + todo.text
+		p {},
+			b {}, "Done"
 			for todo in doneTodos()
-				do (todo) =>
-					div {},
-						todo.text
-						button {onClick: => removeTodo todo.id}, "Remove"
-						button {onClick: => setTodoDone todo.id, false}, "Undo"
+				do (todo) => div {},
+					button {onClick: => removeTodo todo.id}, "Remove"
+					button {onClick: => setTodoDone todo.id, false}, "Undo"
+					" " + todo.text
 r4r => App
 
 # Originalkod (85 rader):
