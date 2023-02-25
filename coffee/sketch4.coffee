@@ -31,8 +31,8 @@ App = =>
 	undoneTodos =  => todos().filter (todo) => !todo.done
 
 	createTodo = (text) => setTodos => [...todos(), { id: "#{Math.random()}", text, done: false }]
-	removeTodo = (todoId) => setTodos todos().filter (todo) => todo.id != todoId
-	setTodoDone = (todoId, done) => setTodos todos().map (todo) => if todo.id == todoId then { ...todo, done } else todo
+	removeTodo = (id) => setTodos todos().filter (todo) => todo.id != id
+	setTodoDone = (id, done) => setTodos todos().map (todo) => if todo.id == id then { ...todo, done } else todo
 
 	addTodo = (s) => if s then createTodo s
 	onkeydown = (event) => if event.key == "Enter" then addTodo event.target.value
